@@ -2,5 +2,11 @@ enum HTTPMethod {
   get,
   post,
   put,
-  delete
+  delete,
+}
+
+enum TypeRequestError {
+  connectionError,
+  serverError,
+  messageError,
 }
