@@ -1,4 +1,5 @@
 import 'package:flutter_webservices/common/validate.dart';
+import 'package:flutter_webservices/http_protocol/resource_execute.dart';
 
 class PostModel {
   int id;
@@ -7,6 +8,11 @@ class PostModel {
   int userId;
 
   PostModel({this.id=0, this.title='', this.body='', this.userId=0});
+
+  @override
+  String toString() {
+    return '$title: $body';
+  }
 
   toObject(Map<dynamic, dynamic> data) {
     Validate validate = Validate(data);
@@ -27,5 +33,30 @@ class PostModel {
     };
   }
 
+  getPosts() async {
+    var response = await ResourceExecute.getPosts();
+    return Validate(response).hasRequestErrorOrBody(getListObject);
+  }
+
+  getPost() async {
+    var response = await ResourceExecute.getPost(id);
+    return Validate(response).hasRequestErrorOrBody(toObject);
+  }
+
+  getUserPosts() async {
+    var response = await ResourceExecute.getUserPosts(userId);
+    return Validate(response).hasRequestErrorOrBody(getListObject);
+  }
+
+  savePost() async {
+    var response = (id > 0)
+      ? await ResourceExecute.updatePost(id, toMap())
+      : await ResourceExecute.createPost(toMap());
+    return Validate(response).hasRequestErrorOrBody(toObject);
+  }
+
+  getListObject(data) {
+    return (data as List).map((e) => toObject(e)).toList();
+  }
 
 }

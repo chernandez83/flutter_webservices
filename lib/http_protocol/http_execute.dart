@@ -38,12 +38,12 @@ class HTTPExecute {
     }
   }
 
-  Uri get endPoint => (queryParams.isNotEmpty) ? Uri.https(url, resource, queryParams) : Uri.parse(uri + resource);
+  Uri get endPoint => (queryParams.isNotEmpty) ? Uri.https(domain, path + resource, queryParams) : Uri.parse(uri + resource);
 
   String get encodedParams => json.encode(params);
 
   Map<String, String> get headers => {
-    'content-type': 'application/json'
+    'Content-type': 'application/json; charset=UTF-8',
   };
 
   executeMethod(HTTPMethod httpMethod) async {
@@ -63,10 +63,11 @@ class HTTPExecute {
         break;
     }
 
-    validateResponse(response);
+    return validateResponse(response);
   }
 
   validateResponse(http.Response response) {
+    print('Response body: ${response.body.toString()}');
     return (response.statusCode >= 200 && response.statusCode < 300)
         ? json.decode(response.body.toString())
         : RequestError(TypeRequestError.serverError, response: response).getRequestError();

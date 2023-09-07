@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_webservices/common/validate.dart';
+import 'package:flutter_webservices/http_protocol/request_error.dart';
+import 'package:flutter_webservices/models/post_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,6 +40,24 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _counter++;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    executeMethod();
+  }
+
+  executeMethod() async {
+    var posts = await PostModel(id: 1, title: 'Hola', body: 'Mundo', userId: 9).savePost();
+
+    if(Validate.isNotRequestError(posts)) {
+      print(posts.toString());
+    } else {
+      RequestError requestError = posts as RequestError;
+      print(requestError.messageError);
+    }
   }
 
   @override
