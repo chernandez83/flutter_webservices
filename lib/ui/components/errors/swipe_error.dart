@@ -7,27 +7,30 @@ class SwipeError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Text(
-            text,
-            style: const TextStyle(
-              fontSize: 26,
-              color: Colors.black,
+      physics: const AlwaysScrollableScrollPhysics(),
+      child: Center(
+        child: Column(
+          children: [
+            Text(
+              text,
+              style: const TextStyle(
+                fontSize: 26,
+                color: Colors.black,
+              ),
             ),
-          ),
-          const Icon(
-            Icons.refresh,
-            color: Colors.blue,
-          ),
-          const Text(
-            'Desliza para actualizar',
-            style: TextStyle(
-              fontSize: 26,
-              color: Colors.black,
+            const Icon(
+              Icons.refresh,
+              color: Colors.blue,
             ),
-          ),
-        ],
+            const Text(
+              'Desliza para actualizar',
+              style: TextStyle(
+                fontSize: 26,
+                color: Colors.black,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

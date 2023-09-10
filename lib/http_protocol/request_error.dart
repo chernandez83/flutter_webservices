@@ -16,11 +16,11 @@ class RequestError {
   getRequestError() {
     switch(typeRequestError) {
       case TypeRequestError.connectionError:
-        getMessage('Sin Conexión');
+        return getMessage('Sin Conexión');
       case TypeRequestError.serverError:
-        getMessage('Error en el servidor ${response!.statusCode}');
+        return getMessage('Error en el servidor ${response!.statusCode}');
       case TypeRequestError.messageError:
-        getMessage(messageError);
+        return getMessage(messageError);
     }
   }
 

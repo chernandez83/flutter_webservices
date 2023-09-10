@@ -55,6 +55,11 @@ class PostModel {
     return Validate(response).hasRequestErrorOrBody(toObject);
   }
 
+  deletePost() async {
+    var response = await ResourceExecute.deletePost(id);
+    return Validate(response).hasRequestErrorOrBody(toObject);
+  }
+
   getListObject(data) {
     return (data as List).map((e) => toObject(e)).toList();
   }
