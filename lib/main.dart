@@ -3,6 +3,7 @@ import 'package:flutter_webservices/common/validate.dart';
 import 'package:flutter_webservices/http_protocol/request_error.dart';
 import 'package:flutter_webservices/models/post_model.dart';
 import 'package:flutter_webservices/ui/components/lists/post_list.dart';
+import 'package:flutter_webservices/ui/screen/post_form_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,6 +45,18 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: const Center(
         child: PostList(),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PostFormScreen(),
+            ),
+          )
+        },
+        tooltip: 'Agregar post',
+        child: const Icon(Icons.add_circle_rounded),
       ),
     );
   }

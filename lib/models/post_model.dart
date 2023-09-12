@@ -29,7 +29,7 @@ class PostModel {
       'id': (id > 0) ? id.toString() : '',
       'title': title,
       'body': body,
-      'userId': (userId > 0) ? userId.toString() : '',
+      'userId': userId.toString(),
     };
   }
 
